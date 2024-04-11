@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> chatting inside .... <%= roomid %></h1>
+    <input type="text" id="input-box"/>
+    <button id="btn"> send</button>
+    <ul id="ul-adding">
+
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+        const socket = io();  
+        const btn = document.getElementById('btn');
+        const input = document.getElementById('input-box')
+        const ul = document.getElementById('ul-adding');
+        socket.emit('joining room', {roomid:'<%= roomid %>' , user:'<%= user %>'})
+        btn.addEventListener('click' , ()=>{
+            socket.emit('new_msg' , {roomid:'<%= roomid %>', user:'<%= user%>', msg:input.value})
+            
+            
+           
+
+            
+
+        })
+        socket.on('joined room', (data)=>{
+            const li = document.createElement('li');
+            li.textContent = data.msg
+            ul.appendChild(li)
+            input.value=''
+        })
+        // socket.on('joined room', ()=>{
+        //     console.log('roomed has been joined');
+        // })
+
+       
+    </script>
+</body>
+</html>
