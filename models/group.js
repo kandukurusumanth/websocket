@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const groupSchema = mongoose.Schema({
-    message:{
+    
+    name:{
         type:String
     },
-    rev:{
-        type:String
-    },
-    sender:{
-        type:String
+    info:{
+        type:Array,
+        default:[]
     }
 })
 const group = mongoose.model('group', groupSchema);
